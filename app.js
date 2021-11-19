@@ -1,7 +1,6 @@
 // TRANSIÇÃO TELA INICIAL
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
-// const btn_create = document.querySelector("#btn-create")
 const container = document.querySelector(".container");
 
 sign_up_btn.addEventListener("click", () => {
@@ -20,14 +19,12 @@ function criaMascara(mascaraInput){
   const mascaras = {
     CPF: valorInput.replace(/[^\d]/g, "").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
   };
-
+  
   maximoInput = 11
-
   valorInput.length === maximoInput ? document.getElementById(`${mascaraInput}Input`).value = mascaras[mascaraInput] : document.getElementById(`${mascaraInput}Input`).value = valorSemPonto;
 };
 
 // Auth (API)
-
 function fazGET(url){
   let request = new XMLHttpRequest()
   request.open("GET", url, false)
@@ -42,9 +39,7 @@ function main(){
 }
 
 //Capturar dados
-
 function auth(){
-  // let a_login = document.getElementById('btn-login'); 
   user = document.querySelector('#userInput')
   password = document.querySelector('#passwordInput')
   valorUser = user.value
@@ -60,7 +55,6 @@ function auth(){
                 'Logado com sucesso!',
                 'success')
             }
-            // a_login.href = "/admin.html"
           }
           else if(value[key]['login'] != `${valorUser}` && value[key]['senha'] != `${valorPassword}`){
             Swal.fire(
@@ -79,17 +73,9 @@ function fazPost(url, body) {
   request.open("POST", url, true)
   request.setRequestHeader("Content-type", "application/json")
   request.send(JSON.stringify(body))
-
-  // request.onload = function() {
-  //     console.log(this.responseText)
-  // }
-  
-  // return request.responseText
 }
 
-
 function cadastraUsuario() {
-  
   let url = "http://127.0.0.1:5000/usuario"
   let nome = document.getElementById("USERInput").value
   let cpf = document.getElementById("CPFInput").value
@@ -104,7 +90,6 @@ function cadastraUsuario() {
       "cpf": cpf,
       "senha": senha
   }
-
   fazPost(url, body)
 }
 
@@ -136,7 +121,6 @@ function checkRegister(){
             'success')
             cadastraUsuario()
         }
-        
       }
 
 main()
