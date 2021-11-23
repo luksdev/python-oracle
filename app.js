@@ -38,26 +38,22 @@ function main(){
   usuarios
 }
 
-//Capturar dados
+//Capturar dados (Autenticação de Usuário)
 function auth(){
   user = document.querySelector('#userInput')
   password = document.querySelector('#passwordInput')
   valorUser = user.value
   valorPassword = password.value
-  var i = 0
 
   for(let key of Object.entries(usuarios)){
     for(let i = 0; i < Object.keys(key[1]).length; i++){
       if(key[1][i]['login'] == `${valorUser}` && key[1][i]['senha'] == `${valorPassword}` && key[1][i]['login'] == `${valorUser}` != undefined){
-        console.log('Passou')
-        console.log(key[1][i]['login'] + ' - ' + key[1][i]['senha'])
         return Swal.fire(
           `Olá ${valorUser}!`,
           'Logado com sucesso!',
           'success')
         }
       else if(key[1][i]['login'] != `${valorUser}` && key[1][i]['senha'] != `${valorPassword}`){
-          console.log('Não passou')
           Swal.fire(
             'Error!',
             'Usuário ou senha incorretos!',
@@ -69,7 +65,6 @@ function auth(){
 }
 
 function fazPost(url, body) {
-  console.log("Body=", body)
   let request = new XMLHttpRequest()
   request.open("POST", url, true)
   request.setRequestHeader("Content-type", "application/json")
@@ -81,10 +76,6 @@ function cadastraUsuario() {
   let nome = document.getElementById("USERInput").value
   let cpf = document.getElementById("CPFInput").value
   let senha = document.getElementById("PASSWORDInput").value
-
-  console.log(nome)
-  console.log(cpf)
-  console.log(senha)
   
   body = {
       "login": nome,
@@ -117,7 +108,7 @@ function checkRegister(){
         )}
         else{
           Swal.fire(
-            `Bom trabalho ${username}!`,
+            `Usuário: ${username}!`,
             'Cadastrado com sucesso!',
             'success')
             cadastraUsuario()
