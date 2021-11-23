@@ -44,26 +44,27 @@ function auth(){
   password = document.querySelector('#passwordInput')
   valorUser = user.value
   valorPassword = password.value
+  var i = 0
 
-  for(var [key, value] of Object.entries(usuarios)){
-      Object.keys(value).forEach((key) => {
-          if(value[key]['login'] == `${valorUser}` && value[key]['senha'] == `${valorPassword}`){
-            let logado = true
-            if(logado == true){
-              Swal.fire(
-                `Olá ${valorUser}!`,
-                'Logado com sucesso!',
-                'success')
-            }
-          }
-          else if(value[key]['login'] != `${valorUser}` && value[key]['senha'] != `${valorPassword}`){
-            Swal.fire(
-              'Error!',
-              'Usuário ou senha incorretos!',
-              'error'
-            )
-          }
-      });
+  for(let key of Object.entries(usuarios)){
+    for(let i = 0; i < Object.keys(key[1]).length; i++){
+      if(key[1][i]['login'] == `${valorUser}` && key[1][i]['senha'] == `${valorPassword}` && key[1][i]['login'] == `${valorUser}` != undefined){
+        console.log('Passou')
+        console.log(key[1][i]['login'] + ' - ' + key[1][i]['senha'])
+        return Swal.fire(
+          `Olá ${valorUser}!`,
+          'Logado com sucesso!',
+          'success')
+        }
+      else if(key[1][i]['login'] != `${valorUser}` && key[1][i]['senha'] != `${valorPassword}`){
+          console.log('Não passou')
+          Swal.fire(
+            'Error!',
+            'Usuário ou senha incorretos!',
+            'error'
+          )
+        }
+    }    
   }
 }
 
