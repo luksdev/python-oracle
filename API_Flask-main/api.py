@@ -1,3 +1,4 @@
+from os import name
 from flask import Flask, Response, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -31,10 +32,50 @@ class Usuario(db.Model):
     def to_json(self):
         return {"login": self.login, "cpf": self.cpf , "senha": self.senha}
 
+class Livros(db.Model):
+    nome = db.Column(db.String(100), primary_key = True)
+    descricao = db.Column(db.String(200))
+    autor = db.Column(db.String(100))
+
+    # db.create_all()
+    # print('Cadastrado')
+    def to_json(self):
+        return {"nome": self.nome, "descricao": self.descricao , "autor": self.autor}        
+
+#routes usuarios
 @app.route("/")
 def home():
     connection = cx_Oracle.connect('system', 'ledux', dsn_tns)
     return jsonify(status='success', db_version=connection.version)
+
+#routes livros
+
+@app.route("/livros", methods=["GET"])
+def seleciona_livros():
+    livros_objetos = Livros.query.all()
+    livros_json = [livro.to_json() for livro in livros_objetos]
+
+    return gera_response(200, "livros", livros_json)
+
+@app.route("/livro", methods=["POST"])
+def cria_livro():
+    body = request.get_json()
+
+    try:
+        livro = Livros(nome=body["nome"], descricao=body["descricao"], autor=body["autor"])
+        db.session.add(livro)
+        db.session.commit()
+        return gera_response(201, "livro", livro.to_json(), "Criado com sucesso")
+    except Exception as e:
+        print('Erro', e)
+        return gera_response(400, "usuario", {}, "Erro ao cadastrar")
+
+
+
+
+
+
+
 
 # Selecionar Tudo
 @app.route("/usuarios", methods=["GET"])

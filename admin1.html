@@ -10,16 +10,13 @@
     crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="adminstyle.css">
     <title>Admin CoffingBooks</title>
 </head>
 <body>
-    <div id="particles-js"></div>
-
-    <nav class="navbar navbar-expand-sm ">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid ">
             <a class="navbar-brand" href="#">
-             Coffing Books ☕
+            <img src="https://static.zerochan.net/Neeko.%28Leagueof.Legends%29.full.2448179.jpg" alt="Avatar Logo"style="width:40px;" class="rounded-pill"> CoffingBooks- Admin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -33,7 +30,7 @@
                     <a class="nav-link" href="#">Listar livros</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="index.html">Sair</a>
+                    <a class="nav-link" href="#">Sair</a>
                   </li>
                 </ul>
               </div>
@@ -41,50 +38,15 @@
         </div>
     </nav>
 
-    <div class="card-group container mt-3 text-white">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Total de livros:</h5>
-            <p class="card-text"><h1 class="text-center" id="card-count-books"></h1></p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Último título adicionado</h5>
-            <p class="card-text"><h1 class="text-center" id="card-last-book"></h1></p>
-          </div>
-        </div>
-        
-        </div>
-      </div>
-
-
-      <div class="container mt-3">
-        <div class="card text-center text-white">
-            <div class="card-header">
-              Best-Seller
-            </div>
+    <div class="container p-3">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">Total de livros:</div>
             <div class="card-body">
-              <h5 class="card-title"><h5 id="title-lancamento"></h5></h5>
-              <p class="card-text"><p id="desc-lancamento"></p></p>
-              <p class="card-text"><p id="autor-lancamento"></p></p>
-            </div>
-            <div class="card-footer text-muted">
-              Mais de 2000 vendidos
-            </div>
-          </div>
-            
+              <h5 class="card-title">Quantidade atualizada:</h5>
+              <p class="card-text"><h1 id="card-count-books"></h1></p>
         </div>
-      </div>
-      
-    
+    </div>
 
-    
-
-    
-
-    <script src="/particles/particles.min.js"></script>
-    <script src="/particles/app.js"></script>
     <script src="/sweetalert/sweetalert.js"></script>
     <script src="admin.js"></script>
 </body>

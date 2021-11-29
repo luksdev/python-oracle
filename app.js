@@ -42,27 +42,50 @@ function main(){
 function auth(){
   user = document.querySelector('#userInput')
   password = document.querySelector('#passwordInput')
+  error = document.querySelector('.text-error');
   valorUser = user.value
   valorPassword = password.value
 
   for(let key of Object.entries(usuarios)){
+    acesso = false
     for(let i = 0; i < Object.keys(key[1]).length; i++){
       if(key[1][i]['login'] == `${valorUser}` && key[1][i]['senha'] == `${valorPassword}` && key[1][i]['login'] == `${valorUser}` != undefined){
-        return Swal.fire(
-          `Olá ${valorUser}!`,
-          'Logado com sucesso!',
-          'success')
-        }
-      else if(key[1][i]['login'] != `${valorUser}` && key[1][i]['senha'] != `${valorPassword}`){
-          Swal.fire(
-            'Error!',
-            'Usuário ou senha incorretos!',
-            'error'
-          )
-        }
+          let timerInterval
+          Swal.fire({
+            title: `Olá ${valorUser}`,
+            icon: 'success',
+            html: 'Sendo redirecionado em <b></b> milisegundos.',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+          setTimeout(function() {
+            window.location.href = "admin.html";
+          }, 1800);
+          error.innerHTML = '<p>Logado</p>'
+          acesso = true
+        }else if(acesso == false){
+          error.innerHTML = '<p style="color: red; font-family: Poppins">Usuário ou senha incorretos</p>';
     }    
   }
 }
+}
+
+
 
 function fazPost(url, body) {
   let request = new XMLHttpRequest()

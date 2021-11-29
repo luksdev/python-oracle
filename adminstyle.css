@@ -1,0 +1,72 @@
+/* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  
+}
+body{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to top right, #1f3c6e 20%, #2a6d8b 100%) no-repeat bottom center scroll;
+    background-position: 30% 45%;
+    background-size: cover;
+}
+
+/* Particles */
+
+#particles-js{
+    position: absolute;
+    z-index: -100;
+    width: 99%;
+}
+
+/* Navbar */
+
+.navbar{
+    border-radius: 30px;
+    width: 83%;
+    margin: 10px auto;
+    /* From https://css.glass */
+    background: rgba(68, 129, 235, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.4px);
+    -webkit-backdrop-filter: blur(3.4px);
+    border: 1px solid rgba(68, 129, 235, 0.13);
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.32); 
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.32);
+}
+
+.navbar a{
+    color: white;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+}
+
+/* Card */
+
+.card{
+/* From https://css.glass */
+    background: rgba(68, 129, 235, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.315);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(3.4px);
+    border: 1px solid rgba(68, 129, 235, 0.13);
+}
+
+.card h1{
+    font-size: 30px;
+}
