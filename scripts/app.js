@@ -74,7 +74,7 @@ function auth(){
             }
           })
           setTimeout(function() {
-            window.location.href = "admin.html";
+            window.location.href = "/pages/admin.html";
           }, 1800);
           error.innerHTML = '<p>Logado</p>'
           acesso = true

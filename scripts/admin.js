@@ -32,7 +32,7 @@ function main(){
 
     lancamento_nome.innerHTML = (`<h1>${last_books[0]['nome']}</h1>`);
     lancamento_desc.innerHTML = (`<p>${last_books[0]['descricao']}</p>`);
-    lancamento_autor.innerHTML = (`<p>Autor.:  ${last_books[0]['autor']}</p>`);
+    lancamento_autor.innerHTML = (`<p>Autor.: ${last_books[0]['autor']}</p>`);
 
 
 }
