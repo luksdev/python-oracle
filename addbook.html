@@ -132,7 +132,36 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Cadastrar novo livro</h1>
+                    </div>
 
+
+                    <div class="container" id="alert-sucesso">
+
+                    </div>
+
+
+                    <div class="card shadow mb-4 p-3">
+                        <form action="#" name="form_register">
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Título</label>
+                                <input name="nome_register" type="text" class="form-control" id="tituloInput" placeholder="O Silêncio dos Inocentes" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Autor</label>
+                                <input name="autor_register" type="text" class="form-control" id="autorInput" placeholder="Thomas Harris" required>
+                              </div>
+                    
+                            <div class="form-floating">
+                                <label for="floatingTextarea2" >Descricão</label>
+                                <textarea name="desc_register" maxlength="1000" required class="form-control" placeholder="Breve comentário sobre o livro" id="descricaoInput" style="height: 100px"></textarea>
+                              </div>
+                
+                            <button class="btn btn-primary mt-3" type="submit" onclick="cadastraLivro()">Cadastrar</button>
+
+                              
+                        </form>
                     
                 </div>
                 <!-- /.container-fluid -->
@@ -182,7 +211,7 @@
     </div>
 
     <!-- Cards automáticos -->
-    <script src="/scripts/allbooks.js"></script>
+    <script src="/scripts/cadastro.js"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
