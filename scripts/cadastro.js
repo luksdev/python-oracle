@@ -12,6 +12,8 @@ function cadastraLivro() {
     let nome = document.getElementById("tituloInput").value
     let descricao = document.getElementById("descricaoInput").value
     let autor = document.getElementById("autorInput").value
+
+    console.log(nome)
     
     body = {
         "nome": nome,

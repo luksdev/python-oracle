@@ -1,7 +1,7 @@
 from os import name
 from flask import Flask, Response, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import json
 import cx_Oracle
 import config
@@ -15,10 +15,17 @@ dsn_tns = cx_Oracle.makedsn(ip, port, SID)
 encoding = 'UTF-8'
 
 app = Flask(__name__)
-CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = ('oracle+cx_oracle://system:ledux@' +
             dsn_tns)
+CORS(app)
+cors = CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
+
 
 db = SQLAlchemy(app)
 
@@ -70,10 +77,39 @@ def cria_livro():
         print('Erro', e)
         return gera_response(400, "usuario", {}, "Erro ao cadastrar")
 
+#ATUALIZA LIVRO
+@app.route("/livro/<nome>", methods=["PUT"])
+def atualiza_livro(nome):
+    atualiza_livro = Livros.query.filter_by(nome=nome).first()
+    body = request.get_json()
 
+    try:
+        if ('nome' in body):
+            atualiza_livro.nome = body['nome']
+        if ('descricao' in body):
+            atualiza_livro.descricao = body['descricao']
+        if ('autor' in body):
+            atualiza_livro.autor = body['autor']    
 
+        db.session.add(atualiza_livro)
+        db.session.commit()
+        return gera_response(200, "usuario", atualiza_livro.to_json(), "Atualizado com sucesso")
+    except Exception as e:
+        print('Erro', e)
+        return gera_response(400, "usuario", {}, "Erro ao atualizar")
 
-
+#delete livro
+@app.route("/livro/<nome>", methods=["DELETE"])
+@cross_origin()
+def deleta_livro(nome):
+    livro_objeto = Livros.query.filter_by(nome=nome).first()
+    try:
+        db.session.delete(livro_objeto)
+        db.session.commit()
+        return gera_response(200, "livro", livro_objeto.to_json(), "Deletado com sucesso")
+    except Exception as e:
+        print('Erro', e)
+        return gera_response(400, "livro", {}, "Erro ao deletar")
 
 
 
@@ -86,9 +122,9 @@ def seleciona_usuarios():
     return gera_response(200, "usuarios", usuarios_json)
 
 # Selecionar Individual
-@app.route("/usuario/<id>", methods=["GET"])
-def seleciona_usuario(id):
-    usuario_objeto = Usuario.query.filter_by(id=id).first()
+@app.route("/usuario/<cpf>", methods=["GET"])
+def seleciona_usuario(cpf):
+    usuario_objeto = Usuario.query.filter_by(cpf=cpf).first()
     usuario_json = usuario_objeto.to_json()
 
     return gera_response(200, "usuario", usuario_json)
@@ -132,9 +168,9 @@ def atualiza_usuario(id):
 
 
 # Deletar
-@app.route("/usuario/<id>", methods=["DELETE"])
-def deleta_usuario(id):
-    usuario_objeto = Usuario.query.filter_by(id=id).first()
+@app.route("/usuario/<cpf>", methods=["DELETE"])
+def deleta_usuario(cpf):
+    usuario_objeto = Usuario.query.filter_by(cpf=cpf).first()
 
     try:
         db.session.delete(usuario_objeto)
